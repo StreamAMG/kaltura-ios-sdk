@@ -16,6 +16,7 @@
 #import "NYT360DataTypes.h"
 #import "NYT360ViewController.h"
 #import "NYT360CameraPanGestureRecognizer.h"
+#import <WebKit/WebKit.h>
 
 /* Asset keys */
 NSString * const TracksKey = @"tracks";
@@ -104,7 +105,7 @@ NSString * const StatusKeyPath = @"status";
 
 - (void)addPlayerToView {
     if (_parentView.subviews.count) {
-        UIWebView *wv = _parentView.subviews.lastObject;
+        WKWebView *wv = _parentView.subviews.lastObject;
         [_parentView.subviews.lastObject removeFromSuperview];
         [_parentView.layer.sublayers.firstObject removeFromSuperlayer];
         [_parentView.layer addSublayer:_layer];

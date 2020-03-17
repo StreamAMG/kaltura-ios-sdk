@@ -9,9 +9,9 @@
 #import "KPBrowserViewController.h"
 #import "DeviceParamsHandler.h"
 
-@interface KPBrowserViewController () <UIWebViewDelegate>{
+@interface KPBrowserViewController () {
     
-    __weak IBOutlet UIWebView *webview;
+   // __weak IBOutlet UIWebView *webview;
     __weak IBOutlet UIView *loadingView;
 }
 
@@ -20,7 +20,7 @@
 @implementation KPBrowserViewController
 
 + (id)currentBrowser {
-    NSString *nibName = isIOS(8) ? @"KPWebKitBrowserViewController" : @"KPBrowserViewController";
+    NSString *nibName = @"KPWebKitBrowserViewController";
     return [[NSClassFromString(nibName) alloc] initWithNibName:nibName bundle:nil];
 }
 
@@ -40,16 +40,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [webview loadRequest:[NSURLRequest requestWithURL:_url]];
+  //  [webview loadRequest:[NSURLRequest requestWithURL:_url]];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [webview loadHTMLString:@"" baseURL:nil];
-    [webview stopLoading];
-    webview.delegate = nil;
-    [webview removeFromSuperview];
+//    [webview loadHTMLString:@"" baseURL:nil];
+//    [webview stopLoading];
+//    webview.delegate = nil;
+//    [webview removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,32 +67,32 @@
 }
 
 
-#pragma mark
-#pragma mark UIWebViewDelegate
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSString *currentRequest = request.URL.absoluteString;
-    for (NSString *redirectUrl in _redirectURIs) {
-        if ([currentRequest hasPrefix:redirectUrl] && _completionHandler) {
-            _completionHandler(KPBrowserResultSuccess, nil);
-            break;
-        }
-    }
-    return YES;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [UIView animateWithDuration:0.35 animations:^{
-        loadingView.alpha = 0;
-    }];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    if (_completionHandler) {
-        _completionHandler(KPBrowserResultFailed, error);
-    }
-}
-
-- (void)dealloc {
-    _completionHandler = nil;
-}
+//#pragma mark
+//#pragma mark UIWebViewDelegate
+//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+//    NSString *currentRequest = request.URL.absoluteString;
+//    for (NSString *redirectUrl in _redirectURIs) {
+//        if ([currentRequest hasPrefix:redirectUrl] && _completionHandler) {
+//            _completionHandler(KPBrowserResultSuccess, nil);
+//            break;
+//        }
+//    }
+//    return YES;
+//}
+//
+//- (void)webViewDidFinishLoad:(UIWebView *)webView {
+//    [UIView animateWithDuration:0.35 animations:^{
+//        loadingView.alpha = 0;
+//    }];
+//}
+//
+//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+//    if (_completionHandler) {
+//        _completionHandler(KPBrowserResultFailed, error);
+//    }
+//}
+//
+//- (void)dealloc {
+//    _completionHandler = nil;
+//}
 @end
