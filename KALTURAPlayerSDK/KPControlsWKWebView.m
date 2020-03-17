@@ -44,6 +44,13 @@
         self.scrollView.bounces = NO;
         self.scrollView.bouncesZoom = NO;
         self.backgroundColor = [UIColor clearColor];
+
+        /// Adding kalturaNativeCordovaPlayer in the user agent so the web player will reconize that is a mobile device. 
+        [self evaluateJavaScript: @"navigator.userAgent" completionHandler:^(id _Nullable defaultUA, NSError * _Nullable error) {
+            NSString* finalUA = [defaultUA stringByAppendingString:@"kalturaNativeCordovaPlayer"];
+            self.customUserAgent = finalUA;
+         }];
+    
         return self;
     }
     return nil;
