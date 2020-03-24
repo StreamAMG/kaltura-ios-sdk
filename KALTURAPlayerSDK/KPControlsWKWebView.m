@@ -33,7 +33,7 @@
     // Create the configuration with the user content controller
     configuration = [WKWebViewConfiguration new];
     configuration.userContentController = userContentController;
-    configuration.allowsInlineMediaPlayback = true;  
+    configuration.allowsInlineMediaPlayback = true;
     self = [super initWithFrame:frame configuration:configuration];
     if (self) {
         self.navigationDelegate = self;
@@ -44,11 +44,12 @@
         self.scrollView.bounces = NO;
         self.scrollView.bouncesZoom = NO;
         self.backgroundColor = [UIColor clearColor];
-
+        
         /// Adding kalturaNativeCordovaPlayer in the user agent so the web player will reconize that is a mobile device.
         NSString* suffixUA = @"kalturaNativeCordovaPlayer";
         [self evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id _Nullable defaultUA, NSError * _Nullable error) {
             NSString* finalUA = [defaultUA stringByAppendingString:suffixUA];
+            
             if (@available(iOS 9.0, *)) {
                 self.customUserAgent = finalUA;
             }
@@ -78,13 +79,13 @@
 }
 
 - (void)fetchvideoHolderHeight:(void (^)(CGFloat))fetcher {
-        [self evaluateJavaScript:@"NativeBridge.videoPlayer.getVideoHolderHeight()" completionHandler:^(id result, NSError *error) {
-            if (error) {
-                KPLogError(@"JS Error %@", error.description);
-            } else if (result) {
-                fetcher([result floatValue]);
-            }
-        }];
+    [self evaluateJavaScript:@"NativeBridge.videoPlayer.getVideoHolderHeight()" completionHandler:^(id result, NSError *error) {
+        if (error) {
+            KPLogError(@"JS Error %@", error.description);
+        } else if (result) {
+            fetcher([result floatValue]);
+        }
+    }];
 }
 
 - (CGRect)controlsFrame {
