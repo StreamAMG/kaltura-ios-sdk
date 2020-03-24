@@ -45,12 +45,17 @@
         self.scrollView.bouncesZoom = NO;
         self.backgroundColor = [UIColor clearColor];
 
-        /// Adding kalturaNativeCordovaPlayer in the user agent so the web player will reconize that is a mobile device. 
-        [self evaluateJavaScript: @"navigator.userAgent" completionHandler:^(id _Nullable defaultUA, NSError * _Nullable error) {
-            NSString* finalUA = [defaultUA stringByAppendingString:@"kalturaNativeCordovaPlayer"];
-            self.customUserAgent = finalUA;
-         }];
-    
+        /// Adding kalturaNativeCordovaPlayer in the user agent so the web player will reconize that is a mobile device.
+        NSString* suffixUA = @"kalturaNativeCordovaPlayer";
+        [self evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id _Nullable defaultUA, NSError * _Nullable error) {
+            NSString* finalUA = [defaultUA stringByAppendingString:suffixUA];
+            if (@available(iOS 9.0, *)) {
+                self.customUserAgent = finalUA;
+            }
+            NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:finalUA, @"UserAgent", nil];
+            [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
+        }];
+        
         return self;
     }
     return nil;

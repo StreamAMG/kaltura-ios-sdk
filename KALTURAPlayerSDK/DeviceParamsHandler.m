@@ -12,17 +12,13 @@
 
 void setUserAgent() {
     NSString* suffixUA = @"kalturaNativeCordovaPlayer";
-    //UIWebView* wv = [[UIWebView alloc] initWithFrame:CGRectZero];
-    WKWebView *wv = [[WKWebView alloc] initWithFrame:CGRectZero];
-   [wv evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id _Nullable defaultUA, NSError * _Nullable error) {
+    
+    [[[WKWebView alloc] initWithFrame:CGRectZero] evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id _Nullable defaultUA, NSError * _Nullable error) {
         NSString* finalUA = [defaultUA stringByAppendingString:suffixUA];
         NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:finalUA, @"UserAgent", nil];
         [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
     }];
-// NSString* defaultUA = [wv stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    
 }
-
 
 NSString *appVersion() {
     NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];

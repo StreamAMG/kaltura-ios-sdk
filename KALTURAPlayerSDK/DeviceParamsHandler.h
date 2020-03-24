@@ -42,7 +42,9 @@
 #define _deviceOrientation [UIDevice currentDevice].orientation
 #define _statusBarOrientation [UIApplication sharedApplication].statusBarOrientation
 
-void setUserAgent();
+#import <Webkit/Webkit.h>
+
+void setUserAgent(WKWebView* wv);
 NSString *appVersion();
 BOOL isDeviceOrientation(UIDeviceOrientation orientation);
 BOOL isStatusBarOrientation(UIInterfaceOrientation orientation);

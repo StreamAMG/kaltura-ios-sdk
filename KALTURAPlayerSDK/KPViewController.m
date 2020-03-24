@@ -290,7 +290,8 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 - (void)viewDidLoad {
     KPLogTrace(@"Enter");
     appConfigDict = extractDictionary(AppConfigurationFileName, @"plist");
-    setUserAgent();
+    WKWebView *wv = [[WKWebView alloc] initWithFrame:CGRectZero];
+    setUserAgent(wv);
     [self initPlayerParams];
     self.controlsView.shouldUpdateLayout = YES;
     // Pinch Gesture Recognizer - Player Enter/ Exit FullScreen mode
