@@ -410,3 +410,14 @@ You can remove the button by adding the following config:
 #!swift
     config.addConfig("unMuteOverlayButton.parent", "%27hideoverlay%27")
 ```
+
+### How to enable Google Ad ###
+
+Add the following configs: 
+
+```
+#!swift
+    config?.addKey("doubleClick.plugin", withValue: "true")
+    config?.addKey("doubleClick.leadWithFlash", withValue: "false")
+    config?.addKey("doubleClick.adTagUrl", withValue: "tag-url")
+```
