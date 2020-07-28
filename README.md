@@ -1,3 +1,6 @@
+Please always use master branch for production. 
+======
+
 Requisites
 ======
 
@@ -19,9 +22,9 @@ target 'CCDemo' do
 # Comment this line if you're not using Swift and don't want to use dynamic frameworks
 use_frameworks!
 
-pod 'KalturaPlayerSDKStreamamg', :git => 'https://bitbucket.org/sukdev/kaltura-ios-sdk/src/master/', :branch => 'master'
+pod 'KalturaPlayerSDKStreamamg', :git => 'git@bitbucket.org:sukdev/kaltura-ios-sdk.git', :branch => 'master'
 # Only if you are using Google Ads
-pod "GoogleAds-IMA-iOS-SDK" , "~> 3.1.0"
+pod 'GoogleAds-IMA-iOS-SDK' , '~> 3.11.3'
 
 end
 
@@ -421,3 +424,4 @@ Add the following configs:
     config?.addKey("doubleClick.leadWithFlash", withValue: "false")
     config?.addKey("doubleClick.adTagUrl", withValue: "tag-url")
 ```
+
