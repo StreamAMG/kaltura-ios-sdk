@@ -25,6 +25,8 @@
 @property(nonatomic, strong) id<AdsLoader> adsLoader;
 // Container which lets the SDK know where to render ads.
 @property(nonatomic, strong) id<AdDisplayContainer> adDisplayContainer;
+
+@property(nonatomic, strong) id<AdContentPlayhead> contentPlayhead;
 // Rendering settings for ads.
 @property(nonatomic, strong) id<AdsRenderingSettings> adsRenderingSettings;
 
@@ -57,9 +59,7 @@
     
     // Load AVPlayer with path to our content.
     self.contentPlayer = contentPlayer;
-    id<AdsRequest> request = [[NSClassFromString(@"IMAAdsRequest") alloc] initWithAdTagUrl:adLink
-                                                                        adDisplayContainer:self.adDisplayContainer
-                                                                               userContext:nil];
+    id<AdsRequest> request = [[NSClassFromString(@"IMAAdsRequest") alloc] initWithAdTagUrl:adLink adDisplayContainer:self.adDisplayContainer contentPlayhead:self.contentPlayhead userContext:nil];
     
     [self.adsLoader requestAdsWithRequest:request];
 }
@@ -130,6 +130,13 @@
                                                                                         companionSlots:nil];
     }
     return _adDisplayContainer;
+}
+
+- (id<AdContentPlayhead>)contentPlayhead {
+    if (!_contentPlayhead) {
+        _contentPlayhead = [[NSClassFromString(@"IMAAVPlayerContentPlayhead") alloc] initWithAVPlayer:self.contentPlayer];
+    }
+    return _contentPlayhead;
 }
 
 - (id<AdsLoader>)adsLoader {
