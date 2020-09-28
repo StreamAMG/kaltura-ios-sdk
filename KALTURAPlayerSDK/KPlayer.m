@@ -299,10 +299,9 @@ NSString * const StatusKeyPath = @"status";
                 _isEnded = NO;
                 [self stopBuffering];
             } else if (self.currentItem.isPlaybackLikelyToKeepUp) {
-                _isEnded = NO;
-                
                 KPLogTrace(@"PlaybackLikelyToKeepUp");
-                [self playerHanging];
+                _isEnded = NO;
+                [self stopBuffering];
             }
         } else if ([keyPath isEqual:RateKeyPath]) {
             if (self.rate) {
