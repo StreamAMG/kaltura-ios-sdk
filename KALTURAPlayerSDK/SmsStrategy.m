@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Kaltura. All rights reserved.
 //
 
-#import "smsStrategy.h"
+#import "SmsStrategy.h"
 #import <MessageUI/MFMessageComposeViewController.h>
 
 @interface SmsStrategy() <MFMessageComposeViewControllerDelegate>{

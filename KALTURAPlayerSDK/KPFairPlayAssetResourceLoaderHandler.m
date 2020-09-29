@@ -48,34 +48,6 @@ NSString* const SKD_URL_SCHEME_NAME = @"skd";
         return nil;
     }
     
-    //    NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:error];
-    //    if (!dict) {
-    //        KPLogError(@"Invalid license response, error=%@", *error);
-    //        return nil;
-    //    }
-    //
-    //    NSString* errMessage = dict[@"message"];
-    //    if (errMessage) {
-    //        *error = [NSError errorWithDomain:TAG code:'CKCE' userInfo:@{@"ServerMessage": errMessage}];
-    //        KPLogError(@"Error message from license server: %@", errMessage);
-    //        return nil;
-    //    }
-    //    NSString* ckc = dict[@"ckc"];
-    //
-    //    if (!ckc) {
-    //        *error = [NSError errorWithDomain:TAG code:'NCKC' userInfo:nil];
-    //        KPLogError(@"No CKC in license response");
-    //        return nil;
-    //    }
-    //
-    //    NSData* ckcData = [[NSData alloc] initWithBase64EncodedString:ckc options:0];
-    //
-    //    if (![ckcData length]) {
-    //        *error = [NSError errorWithDomain:TAG code:'ICKC' userInfo:nil];
-    //        KPLogError(@"Invalid CKC in license response");
-    //        return nil;
-    //    }
-    
     return responseData;
 }
     

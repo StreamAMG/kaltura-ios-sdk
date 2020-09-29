@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Kaltura. All rights reserved.
 //
 
-#import "emailStrategy.h"
+#import "EmailStrategy.h"
 
 
 @implementation EmailStrategy

@@ -23,8 +23,6 @@ static int32_t enableCount;
 @interface KPURLProtocol()<NSURLConnectionDataDelegate>
 
 @property (nonatomic, strong) NSURLConnection *connection;
-//@property (nonatomic, strong) NSMutableData *mutableData;
-//@property (nonatomic, strong) NSURLResponse *response;
 @property (nonatomic, strong) CachedURLParams *cacheParams;
 
 @end

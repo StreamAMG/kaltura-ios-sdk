@@ -36,10 +36,6 @@
     [webview loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (IBAction)dismissPressed:(UIBarButtonItem *)sender {
     if (_completionHandler) {
