@@ -20,15 +20,15 @@
 			name = Framework;
 			productName = Framework;
 		};
-		BF7BB4AB1BC5371F0018C17B /* Documantation */ = {
+		BF7BB4AB1BC5371F0018C17B /* Documentation */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = BF7BB4AE1BC5371F0018C17B /* Build configuration list for PBXAggregateTarget "Documantation" */;
+			buildConfigurationList = BF7BB4AE1BC5371F0018C17B /* Build configuration list for PBXAggregateTarget "Documentation" */;
 			buildPhases = (
 				BF7BB4AF1BC537250018C17B /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = Documantation;
+			name = Documentation;
 			productName = Documantation;
 		};
 /* End PBXAggregateTarget section */
@@ -644,7 +644,7 @@
 				BFFFA726182F9E31005B3B24 /* KALTURAPlayerSDK */,
 				B372892D1A8787D00076DD33 /* KALTURAPlayerSDKResources */,
 				B3166DD01AF26C4700E99B77 /* Framework */,
-				BF7BB4AB1BC5371F0018C17B /* Documantation */,
+				BF7BB4AB1BC5371F0018C17B /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -1131,7 +1131,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BF7BB4AE1BC5371F0018C17B /* Build configuration list for PBXAggregateTarget "Documantation" */ = {
+		BF7BB4AE1BC5371F0018C17B /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BF7BB4AC1BC5371F0018C17B /* Debug */,
