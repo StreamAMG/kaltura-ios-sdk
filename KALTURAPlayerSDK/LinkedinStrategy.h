@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Kaltura. All rights reserved.
 //
 
-#import "GooglePlusStrategy.h"
+#import "GoogleplusStrategy.h"
 
 @interface LinkedinStrategy :GoogleplusStrategy
 
