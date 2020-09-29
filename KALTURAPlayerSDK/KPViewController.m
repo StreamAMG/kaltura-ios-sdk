@@ -49,7 +49,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
                                 UIActionSheetDelegate,
                                 KPControllerDelegate> {
     // Player Params
-    BOOL isFullScreen, isPlaying, isResumePlayer;
+    BOOL isPlaying, isResumePlayer;
     BOOL _activatedFromBackground;
     NSDictionary *appConfigDict;
     BOOL isCloseFullScreenByTap;
@@ -70,7 +70,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 @property (nonatomic, strong) KPShareManager *shareManager;
 @property (nonatomic, strong) KPlayerFactory *playerFactory;
 @property (nonatomic) BOOL isModifiedFrame;
-@property (nonatomic) BOOL isFullScreenToggled;
+
 @property (nonatomic, strong) UIView *superView;
 @property (nonatomic) NSTimeInterval seekValue;
 
@@ -355,16 +355,8 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
                 strongSelf.setKDPAttribute(@"fullScreenBtn", @"visible", @"false");
             } else {
                 strongSelf.addEventListener(KPlayerEventToggleFullScreen, @"defaultFS", ^(NSString *eventId, NSString *params) {
-                    strongSelf.isFullScreenToggled = !self.isFullScreenToggled;
+                    strongSelf.fullscreen = !self.fullscreen;
                     strongSelf.controlsView.shouldUpdateLayout = YES;
-                    if (strongSelf.isFullScreenToggled) {
-                        strongSelf.view.frame = screenBounds();
-                        [strongSelf.topWindow makeKeyAndVisible];
-                        [strongSelf.topWindow.rootViewController.view addSubview:strongSelf.view];
-                    } else {
-                        strongSelf.view.frame = strongSelf.superView.bounds;
-                        [strongSelf.superView addSubview:strongSelf.view];
-                    }
                 });
             }
         }];
@@ -554,10 +546,9 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 -(void)initPlayerParams {
     KPLogTrace(@"Enter");
     
-    isFullScreen = NO;
+    _fullscreen = NO;
     isPlaying = NO;
     isResumePlayer = NO;
-    _isFullScreenToggled = NO;
     isActionSheetPresented = NO;
     KPLogTrace(@"Exit");
 }
@@ -854,12 +845,24 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     KPLogTrace(@"Exit");
 }
 
-- (void)toggleFullscreen {
+
+- (void) toggleFullscreen{
+    self.fullscreen = !self.fullscreen;
+}
+
+- (void)setFullscreen:(bool)fullscreen {
     KPLogTrace(@"Enter");
-    _isFullScreenToggled = !_isFullScreenToggled;
-    if (!_fullScreenToggeled) {
-        
-        if (_isFullScreenToggled) {
+    
+    _fullscreen = fullscreen;
+    
+    
+    if (_fullScreenToggeled) {
+        // If a `fullScreenToggeled` block has been passed in, call it and don't rearrange the views....
+        _fullScreenToggeled(_fullscreen);
+    } else {
+    
+        // Otherwise, adjust the view hierarchy
+        if (_fullscreen) {
             self.view.frame = screenBounds();
             [self.topWindow addSubview:self.view];
             [self.topWindow makeKeyAndVisible];
@@ -867,14 +870,12 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
             self.view.frame = self.superView.bounds;
             [self.superView addSubview:self.view];
         }
-    } else {
-        _fullScreenToggeled(_isFullScreenToggled);
     }
     
     [self.controlsView updateLayout];
     
     if ([_delegate respondsToSelector:@selector(kPlayer:playerFullScreenToggled:)]) {
-        [_delegate kPlayer:self playerFullScreenToggled:_isFullScreenToggled];
+        [_delegate kPlayer:self playerFullScreenToggled:_fullscreen];
     }
     
     KPLogTrace(@"Exit");
@@ -1086,7 +1087,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    if (!_isModifiedFrame || _isFullScreenToggled) {
+    if (!_isModifiedFrame || _fullscreen) {
         [self.view.layer.sublayers.firstObject setFrame:screenBounds()];
         ((UIView *)self.controlsView).frame = screenBounds();
     }
