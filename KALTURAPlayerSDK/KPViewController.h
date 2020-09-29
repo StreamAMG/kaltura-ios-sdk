@@ -46,38 +46,38 @@
 + (void)setLogLevel:(KPLogLevel)logLevel;
 
 /*!
- *  @function initWithURL:
+ *  @method initWithURL:
  *  
  *  @abstract
  *  Initialize Player instance
  *
- *  @param NSURL url of player content
+ *  @param url url of player content
  */
 - (instancetype)initWithURL:(NSURL *)url;
  
 /*!
- *  @function initWithConfiguration:
+ *  @method initWithConfiguration:
  *
  *  @abstract
  *  Initialize Player instance
  *
- *  @param KPPlayerConfig configuration parameters of the player content
+ *  @param configuration parameters of the player content
  */
 - (instancetype)initWithConfiguration:(KPPlayerConfig *)configuration;
 
 /*!
- *  @function loadPlayerIntoViewController:
+ *  @method loadPlayerIntoViewController:
  *
  *  @abstract
  *  Loads the player controller into the parent controller
  *
- *  @param UIViewController parentViewController the controller which will call the player
+ *  @param parentViewController the controller which will call the player
  */
 - (void)loadPlayerIntoViewController:(UIViewController *)parentViewController;
 
 
 /*!
- *  @function removePlayer
+ *  @method removePlayer
  *
  *  @abstract
  *  Cleaning all the memory of the player
@@ -86,7 +86,7 @@
 - (void)removePlayer;
 
 /*!
- *  @function resetPlayer
+ *  @method resetPlayer
  *
  *  @abstract
  *  Reset the player
@@ -95,32 +95,36 @@
 - (void)resetPlayer;
 
 /*!
- *  @function changeMedia:
+ *  @method changeMedia:
  *
  *  @abstract
- *  Change the entryID without the need of sending new request
+ *  Change the media without changing other parts of the configuration
  *
- *  @param NSString entryID the entryID of the new video
+ *  @param media An arbirary object which is either:
+ *  An NSString containing the entryId of the intended destination
+ *  OR an NSDictionary
+ *
+ *
  */
 - (void)changeMedia:(NSObject *)media;
 
 /*!
- *  @function changeConfiguration:
+ *  @method changeConfiguration:
  *
  *  @abstract
  *  Change the config with no need to recreate player instance
  *
- *  @param KPPlayerConfig config is new configuration object
+ *  @param config set a new configuration
  */
 - (void)changeConfiguration:(KPPlayerConfig *)config;
 
 /*!
- *  @function 	WithConfig:
+ *  @method prefetchPlayerResourcesWithConfig:
  *
  *  @abstract
  *  Prefetch player resources
  *
- *  @param KPPlayerConfig config is current configuration object
+ *  @param config The new configuration object
  */
 - (void) prefetchPlayerResourcesWithConfig:(KPPlayerConfig *)config;
 
@@ -181,7 +185,7 @@ typedef NS_ENUM(NSInteger, KDPAPIState) {
 @property (nonatomic, weak) id<KPCastProvider> castProvider;
 
 /*!
- * @function registerReadyEvent
+ * @method registerReadyEvent
  *
  * @abstract
  * Registers to the players ready event
@@ -201,40 +205,39 @@ typedef NS_ENUM(NSInteger, KDPAPIState) {
 
 
 /*!
- * @function addEventListener:eventID:handler:
+ * @method addEventListener:eventID:handler:
  *
  * @abstract
  * Registers to one of the players events
  *
- * @param NSString name of One of the players events
- * @param NSString event id, will enable to remove the current event by id
+ * @param event name of One of the players events
+ * @param eventID will enable to remove the current event by id
  * @param handler Callback for the ready event.
  */
 - (void)addKPlayerEventListener:(NSString *)event eventID:(NSString *)eventID handler:(void(^)(NSString *eventName, NSString *params))handler;
 
 
 /*!
- * @function removeEventListener:eventID
+ * @method removeEventListener:eventID:
  *
  * @abstract
  * Removes One of the players events by id
  *
- * @param NSString event, name of One of the players events.
- * @param NSString eventID, event id for removal.
- * @param handler Callback for the ready event.
+ * @param event name of One of the players events.
+ * @param eventID event id for removal.
  */
 - (void)removeKPlayerEventListener:(NSString *)event eventID:(NSString *)eventID;
 
 
 
 /*!
- * @function asyncEvaluate:expressionID:handler
+ * @method asyncEvaluate:expressionID:handler:
  *
  * @abstract
  * Evaluates values from the player
  *
- * @param NSString expression, @"{mediaProxy.entry.thumbnailUrl}:
- * @param NSString expressionID, expression id use for several expressions.
+ * @param expression @"{mediaProxy.entry.thumbnailUrl}:
+ * @param expressionID expression id use for several expressions.
  * @param handler Callback with the value of the expression.
  */
 - (void)asyncEvaluate:(NSString *)expression expressionID:(NSString *)expressionID handler:(void(^)(NSString *value))handler;
@@ -242,40 +245,40 @@ typedef NS_ENUM(NSInteger, KDPAPIState) {
 
 
 /*!
- * @function sendNotification:expressionID:forName
+ * @method sendNotification:expressionID:forName
  *
  * @abstract
  * Notifies the player on specific events
  *
- * @param NSString notificationName, notification name
- * @param NSString params, json string for passing parameters to the controls layer (webview).
+ * @param notificationName notification name
+ * @param params json string for passing parameters to the controls layer (webview).
  */
 - (void)sendNotification:(NSString *)notificationName withParams:(NSString *)params;
 
 
 
 /*!
- * @function setKDPAttribute:propertyName:value
+ * @method setKDPAttribute:propertyName:value
  *
  * @abstract
  * Controls elements in the player layer
  *
- * @param NSString pluginName, represents specific element
- * @param NSString propertyName, property of the plugin
- * @param NSString value, sets the property
+ * @param pluginName represents specific element
+ * @param propertyName property of the plugin
+ * @param value sets the property
  */
 - (void)setKDPAttribute:(NSString *)pluginName propertyName:(NSString *)propertyName value:(NSString *)value;
 
 
 
 /*!
- * @function triggerEvent:withValue
+ * @method triggerEvent:withValue
  *
  * @abstract
  * Triggers JavaScript methods on the player
  *
- * @param NSString event, methods name
- * @param NSString value, params for the method
+ * @param event methods name
+ * @param value params for the method
  */
 - (void)triggerEvent:(NSString *)event
            withValue:(NSString *)value;
