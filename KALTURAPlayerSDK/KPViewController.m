@@ -863,7 +863,6 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
             self.view.frame = screenBounds();
             [self.topWindow addSubview:self.view];
             [self.topWindow makeKeyAndVisible];
-            // [self.topWindow.rootViewController.view addSubview:self.view];
         } else {
             self.view.frame = self.superView.bounds;
             [self.superView addSubview:self.view];

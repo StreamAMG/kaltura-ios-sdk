@@ -67,8 +67,7 @@
         }
         completion((KPShareResults)result, shareError);
     }];
-//    KPWebKitBrowserViewController *browser = [KPWebKitBrowserViewController new];
-//    browser.url = [self shareURL:params];
+
     return browser;
 }
 

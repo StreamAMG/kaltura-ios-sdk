@@ -95,13 +95,6 @@
     self.view.frame = (CGRect){0, 0, self.view.frame.size.width, _adPlayerHeight};
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
 
 #pragma mark Lazy Initialization
 - (NSMutableDictionary *)adEventParams {

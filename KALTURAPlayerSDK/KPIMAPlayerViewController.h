@@ -15,29 +15,9 @@
 - (id)imaWebOpenerDelegate;
 @end
 
-/**
- *  Supplies the playhead position for midroll ads
- */
-//@protocol KPIMAAdsPlayerDatasource <IMAContentPlayhead>
-//
-///// Supplies the height of the video holder dynamically
-//@property (nonatomic, assign, readonly) CGFloat adPlayerHeight;
-//
-//@property (nonatomic, copy) NSString *locale;
-//
-//@end
 
 @interface KPIMAPlayerViewController : UIViewController 
 
-
-/**
- *  Initialize the IMA ads controller
- *
- *  @param UIViewController parentController conforms to KPIMAAdsPlayerDatasource for presenting the ads properly
- *
- *  @return KPIMAPlayerViewController IMA ads player
- */
-//- (instancetype)initWithParent:(UIViewController<KPIMAAdsPlayerDatasource> *)parentController;
 
 
 /**

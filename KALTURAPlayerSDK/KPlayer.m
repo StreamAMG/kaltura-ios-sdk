@@ -91,8 +91,7 @@ NSString * const StatusKeyPath = @"status";
                                                      [weakSelf updateCurrentTime:CMTimeGetSeconds(time)];
                                                      [weakSelf.delegate player:weakSelf eventName:TimeUpdateKey
                                                                          value:@(CMTimeGetSeconds(time)).stringValue];
-                                                     //                                          [weakSelf.delegate eventName:ProgressKey
-                                                     //                                                                 value:@(CMTimeGetSeconds(time) / weakSelf.duration).stringValue];
+
                                                  }];
         self.allowsExternalPlayback = YES;
         self.usesExternalPlaybackWhileExternalScreenIsActive = YES;
@@ -385,51 +384,7 @@ NSString * const StatusKeyPath = @"status";
         NSMutableDictionary *languages = @{@"languages": subtitleTracks}.mutableCopy;
         [self.delegate player:self eventName:@"textTracksReceived" JSON:languages.toJSON];
     }
-    //
-    //    NSString* mc = AVMediaCharacteristicLegible;
-    //    AVMediaSelectionGroup *group  = [self.currentItem.asset mediaSelectionGroupForMediaCharacteristic:mc];
-    //    if (group){
-    //        NSMutableArray *captions = [NSMutableArray array];
-    //        NSMutableArray *subtitles = [NSMutableArray array];
-    //
-    //        for (AVMediaSelectionOption *option in group.options){
-    //            NSString *langCode = [option.locale objectForKey:NSLocaleLanguageCode];
-    //            if (langCode == nil){
-    //                langCode = @"en";
-    //            }
-    //            if ([option hasMediaCharacteristic:AVMediaCharacteristicContainsOnlyForcedSubtitles]){
-    //                 [subtitles addObject:@{@"kind": @"subtitle",
-    //                                 @"language": langCode,
-    //                                 @"scrlang": langCode,
-    //                                 @"label": langCode,
-    //                                 @"index": @(subtitles.count),
-    //                                 @"title": option.displayName}];
-    //            }else{
-    //                [captions addObject:@{@"kind": @"subtitle",
-    //                                      @"language": langCode,
-    //                                      @"scrlang": langCode,
-    //                                      @"label": langCode,
-    //                                      @"index": @(captions.count),
-    //                                      @"title": option.displayName}];
-    //            }
-    //        }
-    //
-    //        BOOL isSubtitles;
-    //        if ([subtitles count] > 0){
-    //            isSubtitles = YES;
-    //            NSMutableDictionary *languages = @{@"languages": subtitles}.mutableCopy;
-    //            [self.delegate player:self eventName:@"textTracksReceived" JSON:languages.toJSON];
-    //        }
-    //        if ([captions count] > 0){
-    //            NSMutableDictionary *closedCaptionLanguages = @{@"languages": captions}.mutableCopy;
-    //
-    //            if (!isSubtitles) {
-    //                [self.delegate player:self eventName:@"textTracksReceived" JSON:closedCaptionLanguages.toJSON];
-    //            }
-    //
-    //            [self.delegate player:self eventName:@"closedCaptionsRecived" JSON:closedCaptionLanguages.toJSON];
-    //        }
-    //    }
+
 }
 
 - (void)selectTextTrack:(NSString *)locale {
@@ -693,7 +648,7 @@ NSString * const StatusKeyPath = @"status";
 }
 
 - (void)changeSubtitleLanguage:(NSString *)languageCode {
-    //    self.currentItem selectMediaOption:<#(AVMediaSelectionOption *)#> inMediaSelectionGroup:<#(AVMediaSelectionGroup *)#>
+    // Subtitle language change unimplemented :/
 }
 
 -(void) selectAudioTrack:(int)trackId{
@@ -796,7 +751,7 @@ NSString * const StatusKeyPath = @"status";
     if(!isEnablingTracks) {
         [MPRemoteCommandCenter sharedCommandCenter].playCommand.enabled = YES;
         [[MPRemoteCommandCenter sharedCommandCenter].playCommand removeTarget:nil];
-        //[[MPRemoteCommandCenter sharedCommandCenter].playCommand addTarget:self action:@selector(play)];
+        
         [[MPRemoteCommandCenter sharedCommandCenter].playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent *event) {
             [self play];
             return MPRemoteCommandHandlerStatusSuccess;
@@ -804,8 +759,7 @@ NSString * const StatusKeyPath = @"status";
         
         [MPRemoteCommandCenter sharedCommandCenter].pauseCommand.enabled = YES;
         [[MPRemoteCommandCenter sharedCommandCenter].pauseCommand removeTarget:nil];
-        //[[MPRemoteCommandCenter sharedCommandCenter].pauseCommand addTarget:self action:@selector(pause)];
-     
+
         [[MPRemoteCommandCenter sharedCommandCenter].pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent *event) {
             [self pause];
             return MPRemoteCommandHandlerStatusSuccess;
