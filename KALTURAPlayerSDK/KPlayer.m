@@ -205,11 +205,11 @@ NSString * const StatusKeyPath = @"status";
         return; // protects against a race condition
         
     } else if (self.currentItem.isPlaybackLikelyToKeepUp) {
-        [self stopBuffering];
+        [self didStopBuffering];
         _playerTryCounter = 0;
         [self play]; // continue from where we left off
     } else { // still hanging, not at end
-        [self startBuffering];
+        [self didStartBuffering];
         _playerTryCounter += 1;
         KPLogTrace(@"playerTryCounter::%d", _playerTryCounter);
         double delayInSeconds = 0.5;
@@ -249,7 +249,7 @@ NSString * const StatusKeyPath = @"status";
         _playerTryCounter += 1;
         KPLogTrace(@"playerTryCounter::%d", _playerTryCounter);
         [self pause];
-        [self startBuffering];
+        [self didStartBuffering];
         [self playerContinue];
     } else {
         [self reset];
@@ -293,15 +293,15 @@ NSString * const StatusKeyPath = @"status";
             if (self.currentItem.isPlaybackBufferEmpty) {
                 _isEnded = NO;
                 if (self.rate > 0) {
-                    [self startBuffering];
+                    [self didStartBuffering];
                 }
             } else if (self.currentItem.isPlaybackBufferFull) {
                 _isEnded = NO;
-                [self stopBuffering];
+                [self didStopBuffering];
             } else if (self.currentItem.isPlaybackLikelyToKeepUp) {
                 KPLogTrace(@"PlaybackLikelyToKeepUp");
                 _isEnded = NO;
-                [self stopBuffering];
+                [self didStopBuffering];
             }
         } else if ([keyPath isEqual:RateKeyPath]) {
             if (self.rate) {
@@ -852,7 +852,7 @@ NSString * const StatusKeyPath = @"status";
     }
 }
 
-- (void)startBuffering {
+- (void)didStartBuffering {
     KPLogTrace(@"startBuffering");
     if (self.delegate != nil && !buffering) {
         [self.delegate player:self
@@ -862,7 +862,7 @@ NSString * const StatusKeyPath = @"status";
     }
 }
 
-- (void)stopBuffering {
+- (void)didStopBuffering {
     KPLogTrace(@"stopBuffering");
     if (self.delegate != nil && buffering) {
         [self.delegate player:self
