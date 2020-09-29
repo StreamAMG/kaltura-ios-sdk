@@ -58,8 +58,8 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     NSMutableArray *callBackReadyRegistrations;
     NSURL *videoURL;
     void(^_shareHandler)(NSDictionary *);
-    void (^_seekedEventHandler)();
-    void (^_adRemovedEventHandler)();
+    void (^_seekedEventHandler)(void);
+    void (^_adRemovedEventHandler)(void);
                                     
     BOOL isActionSheetPresented;
 }
@@ -400,7 +400,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     KPLogTrace(@"Exit setCastProvider");
 }
 
-- (void)removeAdPlayerWithCompletion:(void(^)())completion {
+- (void)removeAdPlayerWithCompletion:(void(^)(void))completion {
     _adRemovedEventHandler = [completion copy];
     
     if (self.playerFactory.adController) {
@@ -564,7 +564,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 
 #pragma mark -
 #pragma Kaltura Player External API - KDP API
-- (void)registerReadyEvent:(void (^)())handler {
+- (void)registerReadyEvent:(void(^)(void))handler {
     KPLogTrace(@"Enter");
     
     if (isJsCallbackReady) {
@@ -583,7 +583,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 - (void(^)(void(^)()))registerReadyEvent {
     KPLogTrace(@"Enter");
     __weak KPViewController *weakSelf = self;
-    return ^(void(^readyCallback)()){
+    return ^(void(^readyCallback)(void)){
         [weakSelf registerReadyEvent:readyCallback];
         KPLogTrace(@"Exit");
     };

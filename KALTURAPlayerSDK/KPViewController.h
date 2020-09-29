@@ -201,7 +201,7 @@ typedef NS_ENUM(NSInteger, KDPAPIState) {
  * Callback for the ready event.
  *
  */
-- (void)registerReadyEvent:(void(^)())handler;
+- (void)registerReadyEvent:(void(^)(void))handler;
 
 
 /*!
@@ -289,7 +289,7 @@ typedef NS_ENUM(NSInteger, KDPAPIState) {
 - (void)toggleFullscreen;
 
 /// Wraps registerReadyEvent: method by block syntax.
-@property (nonatomic, copy) void (^registerReadyEvent)(void(^readyCallback)());
+@property (nonatomic, copy) void (^registerReadyEvent)(void(^readyCallback)(void));
 
 /// Wraps addEventListener:eventID:handler: method by block syntax.
 @property (nonatomic, copy, readonly) void (^addEventListener)(NSString *event, NSString *eventID, void(^)(NSString *eventName, NSString *params));
