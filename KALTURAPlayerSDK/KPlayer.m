@@ -183,7 +183,7 @@ NSString * const StatusKeyPath = @"status";
 }
 
 /*!
- * @function playerContinue:
+ * @method playerContinue:
  *
  * @abstract
  * Does the actual waiting and restarting
@@ -234,7 +234,7 @@ NSString * const StatusKeyPath = @"status";
 }
 
 /*!
- * @function playerHanging:
+ * @method playerHanging:
  *
  * @abstract
  * Simply decides whether to wait 0.5 seconds or not
@@ -259,7 +259,7 @@ NSString * const StatusKeyPath = @"status";
 }
 
 /*!
- * @function networkErrorNotifier:
+ * @method networkErrorNotifier:
  *
  * @abstract
  * Creates error message and sends it to delegate method
