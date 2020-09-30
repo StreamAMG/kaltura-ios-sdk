@@ -63,7 +63,7 @@ extern NSString * const KMediaPlaybackStateKey;
  */
 
 - (void)sendKPNotification:(NSString *)kpNotificationName withParams:(NSString *)kpParams;
-- (void)sendKPNotification:(NSString *)kpNotificationName params:(NSString *)kpParams completionHandler:(void(^)())handler;
+- (void)sendKPNotification:(NSString *)kpNotificationName params:(NSString *)kpParams completionHandler:(void(^)(void))handler;
 - (NSTimeInterval)duration;
 - (NSTimeInterval)currentPlaybackTime;
 - (float)volume;
@@ -97,7 +97,7 @@ extern NSString * const KMediaPlaybackStateKey;
 @property (nonatomic, readonly) KPMediaLoadState loadState;
 
 - (void)seek:(NSTimeInterval)playbackTime;
-- (void)seek:(NSTimeInterval)playbackTime completionHandler:(void(^)())handler;
+- (void)seek:(NSTimeInterval)playbackTime completionHandler:(void(^)(void))handler;
 
 @end
 
