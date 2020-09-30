@@ -240,6 +240,7 @@ typedef NS_ENUM(NSInteger, CurrentPlyerType) {
     [self.delegate startCastingWithHandler:^(NSString *value) {
         if (value) {
             __strong KPlayerFactory *strongSelf = weakSelf;
+            if (!strongSelf){ return; }
             [strongSelf.castProvider setVideoUrl: nil
                                    startPosition: playbackTime
                                         autoPlay: YES

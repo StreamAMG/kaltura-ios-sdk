@@ -88,8 +88,10 @@ NSString * const StatusKeyPath = @"status";
                                                       queue:dispatch_get_main_queue()
                     
                                                  usingBlock:^(CMTime time) {
-                                                     [weakSelf updateCurrentTime:CMTimeGetSeconds(time)];
-                                                     [weakSelf.delegate player:weakSelf eventName:TimeUpdateKey
+                                                    __strong KPlayer *strongSelf = weakSelf;
+                                                    if (!strongSelf) { return; }
+                                                     [strongSelf updateCurrentTime:CMTimeGetSeconds(time)];
+                                                     [strongSelf.delegate player:strongSelf eventName:TimeUpdateKey
                                                                          value:@(CMTimeGetSeconds(time)).stringValue];
 
                                                  }];
@@ -575,6 +577,7 @@ NSString * const StatusKeyPath = @"status";
         [self.currentItem seekToTime:CMTimeMake(currentPlaybackTime, 1)
                    completionHandler:^(BOOL finished) {
                        __strong KPlayer *strongSelf = weakSelf;
+                        if (!strongSelf) { return; }
                        NSString *seekingPosition = @"";
                        if (strongSelf.lastPlaybackTime < strongSelf.currentPlaybackTime) {
                            seekingPosition = @"SeekingForward";
@@ -582,7 +585,7 @@ NSString * const StatusKeyPath = @"status";
                            seekingPosition = @"SeekingBackward";
                        }
                        
-                       [strongSelf.delegate player:self eventName:SeekedKey value:seekingPosition];
+                       [strongSelf.delegate player:strongSelf eventName:SeekedKey value:seekingPosition];
                    }];
     }
 }

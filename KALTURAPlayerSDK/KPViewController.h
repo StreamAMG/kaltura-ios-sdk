@@ -134,10 +134,7 @@
 
 @property (nonatomic, strong) KPController *playerController;
 
-/**
- *  Block which notifies that the full screen has been toggeled, when assigning to this block the default full screen behaviour will be canceled and the full screen handling will be your reponsibility. 
- */
-@property (nonatomic, copy) void(^fullScreenToggeled)(BOOL isFullScreen);
+
 
 
 /// Enables to change the player configuration
@@ -286,7 +283,32 @@ typedef NS_ENUM(NSInteger, KDPAPIState) {
 - (void)releaseAndSavePosition;
 - (void)releaseAndSavePositionWithPauseForCast:(BOOL)pause;
 - (void)resumePlayer;
-- (void)toggleFullscreen;
+
+#pragma mark - Fullscreen control
+
+/*!
+ @method toggleFullscreen
+ @abstract toggles between fullscreen and showing the video embedded
+ */
+
+- (void)toggleFullscreen DEPRECATED_MSG_ATTRIBUTE("Prefer using the `fullscreen` property and setting an explicit value");
+
+/*!
+ @property fullscreen
+ @abstract Get or set whether the player is in fullscreen mode.
+ @note Changing the value will cause the view hierarchy to be rearranged UNLESS you have set a block on the `fullScreenToggeled` property.
+ */
+
+@property (nonatomic) bool fullscreen;
+
+/*!
+ @property fullScreenToggeled
+ @abstract A block which notifies that the full screen has been toggled
+ @discussion If you assign a block to this property, the default full screen behaviour will be canceled and the full screen handling will be your reponsibility.
+ */
+@property (nonatomic, copy) void(^fullScreenToggeled)(bool isFullScreen);
+
+#pragma mark - Event listeners (block syntax)
 
 /// Wraps registerReadyEvent: method by block syntax.
 @property (nonatomic, copy) void (^registerReadyEvent)(void(^readyCallback)(void));
