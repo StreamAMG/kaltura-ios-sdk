@@ -782,9 +782,9 @@ NSString * const StatusKeyPath = @"status";
                                                       [weakSelf playerHanging];
                                                   }];
     
-    playbackBufferEmptyKeyPath = NSStringFromSelector(@selector(playbackBufferEmpty));
-    playbackLikelyToKeepUpKeyPath = NSStringFromSelector(@selector(playbackLikelyToKeepUp));
-    playbackBufferFullKeyPath = NSStringFromSelector(@selector(playbackBufferFull));
+    playbackBufferEmptyKeyPath = NSStringFromSelector(@selector(isPlaybackBufferEmpty));
+    playbackLikelyToKeepUpKeyPath = NSStringFromSelector(@selector(isPlaybackLikelyToKeepUp));
+    playbackBufferFullKeyPath = NSStringFromSelector(@selector(isPlaybackBufferFull));
     
     [self.currentItem addObserver:self forKeyPath:playbackBufferEmptyKeyPath options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     [self.currentItem addObserver:self forKeyPath:playbackLikelyToKeepUpKeyPath options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
