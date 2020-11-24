@@ -43,7 +43,7 @@
         self.scrollView.scrollEnabled = NO;
         self.scrollView.bounces = NO;
         self.scrollView.bouncesZoom = NO;
-        self.backgroundColor = [UIColor.greenColor colorWithAlphaComponent:0.5];
+//        self.backgroundColor = [UIColor.greenColor colorWithAlphaComponent:0.5];
         
         /// Adding kalturaNativeCordovaPlayer in the user agent so the web player will reconize that is a mobile device.
         NSString* suffixUA = @"kalturaNativeCordovaPlayer";
