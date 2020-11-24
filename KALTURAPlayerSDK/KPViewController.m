@@ -140,12 +140,12 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     self.kPlayerEventsDict = nil;
     [self removeFromParentViewController];
     
-    @try {
-        [self.view removeObserver:self forKeyPath:@"frame" context:nil];
-    }
-    @catch (NSException *exception) {
-        KPLogTrace(@"frame not observed");
-    }
+    //    @try {
+    //        [self.view removeObserver:self forKeyPath:@"frame" context:nil];
+    //    }
+    //    @catch (NSException *exception) {
+    //        KPLogTrace(@"frame not observed");
+    //    }
     
     _delegate = nil;
     _playerController = nil;
@@ -208,17 +208,17 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     _shareHandler = shareHandler;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    if (keyPath.isFrameKeypath) {
-        if ([object isEqual:self.view]) {
-            [self.view.layer.sublayers.firstObject setFrame:(CGRect){CGPointZero, self.view.frame.size}];
-            ((UIView *)self.controlsView).frame = (CGRect){CGPointZero, self.view.frame.size};
-        }
-    }
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath
+//                      ofObject:(id)object
+//                        change:(NSDictionary *)change
+//                       context:(void *)context {
+//    if (keyPath.isFrameKeypath) {
+//        if ([object isEqual:self.view]) {
+//            [self.view.layer.sublayers.firstObject setFrame:(CGRect){CGPointZero, self.view.frame.size}];
+//            ((UIView *)self.controlsView).frame = (CGRect){CGPointZero, self.view.frame.size};
+//        }
+//    }
+//}
 
 
 #pragma mark -
@@ -288,12 +288,14 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 #pragma mark -
 #pragma mark View flow methods
 - (void)viewDidLoad {
+    
+    self.view.translatesAutoresizingMaskIntoConstraints = false;
+    
     KPLogTrace(@"Enter");
     appConfigDict = extractDictionary(AppConfigurationFileName, @"plist");
-    WKWebView *wv = [[WKWebView alloc] initWithFrame:CGRectZero];
-    setUserAgent(wv);
+
     [self initPlayerParams];
-    self.controlsView.shouldUpdateLayout = YES;
+    
     // Pinch Gesture Recognizer - Player Enter/ Exit FullScreen mode
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                 action:@selector(didPinchInOut:)];
@@ -309,11 +311,6 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
                                                  name: UIApplicationDidBecomeActiveNotification
                                                object: nil];
     
-    [self.view addObserver:self
-                forKeyPath:@"frame"
-                   options:NSKeyValueObservingOptionNew
-                   context:nil];
-
     // Initialize player factory
     if (!_playerFactory) {
         _playerFactory = [[KPlayerFactory alloc] initWithPlayerClassName:PlayerClassName];
@@ -330,12 +327,29 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     
     // Initialize HTML layer (controls)
     if (!self.controlsView) {
-        self.controlsView = [KPControlsView defaultControlsViewWithFrame:(CGRect){CGPointZero, self.view.frame.size}];
+        
+        self.controlsView = [KPControlsView defaultControlsViewWithFrame:CGRectZero];
+        
+        UIView *controlsViewAsView = (UIView*)self.controlsView;
+        
+        [controlsViewAsView setTranslatesAutoresizingMaskIntoConstraints:false];
+        
+//        controlsViewAsView.backgroundColor = [UIColor.systemPinkColor colorWithAlphaComponent:0.5];
+        
         self.controlsView.controlsDelegate = self;
         [self.controlsView loadRequest:[NSURLRequest requestWithURL:[self.currentConfiguration appendConfiguration:videoURL]]];
-        [self.view addSubview:(UIView *)self.controlsView];
+        [self.view addSubview:controlsViewAsView];
+        
+//        NSArray *constraints = @[
+//            [self.view.leadingAnchor constraintEqualToAnchor: controlsViewAsView.leadingAnchor],
+//            [self.view.topAnchor constraintEqualToAnchor:controlsViewAsView.topAnchor],
+//            [self.view.trailingAnchor constraintEqualToAnchor:controlsViewAsView.trailingAnchor],
+//            [self.view.bottomAnchor constraintEqualToAnchor:controlsViewAsView.bottomAnchor]];
+//        
+//        [NSLayoutConstraint activateConstraints:constraints];
         _kdpAPIState = KDPAPIStateUnknown;
     }
+//    self.controlsView.shouldUpdateLayout = YES;
     
     // Handle full screen events
     __weak KPViewController *weakSelf = self;
@@ -410,7 +424,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
         [self addKPlayerEventListener:AdsSupportEndAdPlaybackKey eventID:AdsSupportEndAdPlaybackKey handler:^(NSString *eventName, NSString *params) {
             __strong KPViewController *strongSelf = weakSelf;
             if (!strongSelf){ return; }
-
+            
             [strongSelf removeKPlayerEventListener:AdsSupportEndAdPlaybackKey eventID:AdsSupportEndAdPlaybackKey];
             if (strongSelf->_adRemovedEventHandler) {
                 KPLogDebug(@"call seekedEventHandler");
@@ -439,10 +453,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     if (!_superView) {
         _superView = self.view.superview;
     }
-    if (isIOS(7) && _currentConfiguration.supportedInterfaceOrientations != UIInterfaceOrientationMaskAll) {
-        [self.view.layer.sublayers.firstObject setFrame:screenBounds()];
-        ((UIView *)self.controlsView).frame = screenBounds();
-    }
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -880,15 +891,17 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
         // If a `fullScreenToggeled` block has been passed in, call it and don't rearrange the views....
         _fullScreenToggeled(_fullscreen);
     } else {
-    
+        
         // Otherwise, adjust the view hierarchy
         if (_fullscreen) {
-            self.view.frame = screenBounds();
+            
             [self.topWindow addSubview:self.view];
             [self.topWindow makeKeyAndVisible];
+            [self.view setNeedsLayout];
         } else {
-            self.view.frame = self.superView.bounds;
+            
             [self.superView addSubview:self.view];
+            [self.view setNeedsLayout];
         }
     }
     
@@ -1106,23 +1119,15 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 
 #pragma mark -
 #pragma mark Rotation methods
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
-}
 
-- (BOOL)shouldAutorotate{
-    return YES;
-}
 
--(UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return self.currentConfiguration.supportedInterfaceOrientations;
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    if (!_isModifiedFrame || _fullscreen) {
-        [self.view.layer.sublayers.firstObject setFrame:screenBounds()];
-        ((UIView *)self.controlsView).frame = screenBounds();
-    }
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    self.view.frame = self.view.superview.bounds;
+    
+    [self.view.layer.sublayers.firstObject setFrame:self.view.bounds];
+    ((UIView *)self.controlsView).frame = self.view.bounds;
+//        [self.controlsView updateLayout];
 }
 
 - (BOOL)prefersStatusBarHidden {
