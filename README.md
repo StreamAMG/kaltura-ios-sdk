@@ -24,7 +24,7 @@ use_frameworks!
 
 pod 'KalturaPlayerSDKStreamamg', :git => 'git@bitbucket.org:sukdev/kaltura-ios-sdk.git', :branch => 'master'
 # Only if you are using Google Ads
-pod 'GoogleAds-IMA-iOS-SDK' , '~> 3.11.3'
+pod 'GoogleAds-IMA-iOS-SDK', '~> 3.13.0'
 
 end
 
