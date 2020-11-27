@@ -340,13 +340,13 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
         [self.controlsView loadRequest:[NSURLRequest requestWithURL:[self.currentConfiguration appendConfiguration:videoURL]]];
         [self.view addSubview:controlsViewAsView];
         
-//        NSArray *constraints = @[
-//            [self.view.leadingAnchor constraintEqualToAnchor: controlsViewAsView.leadingAnchor],
-//            [self.view.topAnchor constraintEqualToAnchor:controlsViewAsView.topAnchor],
-//            [self.view.trailingAnchor constraintEqualToAnchor:controlsViewAsView.trailingAnchor],
-//            [self.view.bottomAnchor constraintEqualToAnchor:controlsViewAsView.bottomAnchor]];
-//        
-//        [NSLayoutConstraint activateConstraints:constraints];
+        NSArray *constraints = @[
+            [self.view.leadingAnchor constraintEqualToAnchor: controlsViewAsView.leadingAnchor],
+            [self.view.topAnchor constraintEqualToAnchor:controlsViewAsView.topAnchor],
+            [self.view.trailingAnchor constraintEqualToAnchor:controlsViewAsView.trailingAnchor],
+            [self.view.bottomAnchor constraintEqualToAnchor:controlsViewAsView.bottomAnchor]];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
         _kdpAPIState = KDPAPIStateUnknown;
     }
 //    self.controlsView.shouldUpdateLayout = YES;
