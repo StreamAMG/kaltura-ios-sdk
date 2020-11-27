@@ -119,8 +119,7 @@
 // Create our AdDisplayContainer. Initialize it with our videoView as the container. This
 - (id<AdDisplayContainer>)adDisplayContainer {
     if (!_adDisplayContainer) {
-        _adDisplayContainer = [[NSClassFromString(@"IMAAdDisplayContainer") alloc] initWithAdContainer:self.view
-                                                                                        companionSlots:nil];
+        _adDisplayContainer = [[NSClassFromString(@"IMAAdDisplayContainer") alloc] initWithAdContainer:self.view viewController:self];
     }
     return _adDisplayContainer;
 }

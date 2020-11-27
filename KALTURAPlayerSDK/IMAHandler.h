@@ -13,8 +13,8 @@
 @protocol AdDisplayContainer <NSObject>
 
 - (instancetype)initWithAdContainer:(UIView *)adContainer
-                     companionSlots:(NSArray *)companionSlots;
-
+                             viewController:(UIViewController *)
+                                                adContainerViewController;
 @end
 
 @protocol AdContentPlayhead <NSObject>
