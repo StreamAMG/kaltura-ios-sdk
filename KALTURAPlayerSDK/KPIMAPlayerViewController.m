@@ -238,17 +238,28 @@
             self.adEventParams.isLinear = event.ad.isLinear;
             eventParams = self.adEventParams.toJSON.adSkipped;
             break;
+    break;
+        case kIMAAdEvent_STREAM_LOADED:
+            [adsManager start];
+            self.adEventParams.isLinear = event.ad.isLinear;
+            self.adEventParams.adID = event.ad.adId;
+            self.adEventParams.adSystem = @"null";
+            self.adEventParams.adPosition = event.ad.adPodInfo.adPosition;
+            eventParams = self.adEventParams.toJSON.adLoaded;
+    break;
+        case kIMAAdEvent_STREAM_STARTED:
+            self.view.hidden = NO;
+            self.adEventParams.duration = event.ad.duration;
+            eventParams = self.adEventParams.toJSON.adStart;
+            break;
         default:
             break;
     }
     self.adEventParams = nil;
-    
-    if (eventParams) {
         [self.delegate player:nil
                     eventName:eventParams.allKeys.firstObject
                          JSON:eventParams.allValues.firstObject];
         eventParams = nil;
-    }
 }
 
 - (void)adsManagerDidRequestContentPause:(id<AdsManager>)adsManager {
@@ -275,6 +286,7 @@
     timeParams.duration = totalTime;
     timeParams.remain = totalTime - mediaTime;
     NSDictionary *eventParams = timeParams.toJSON.adRemainingTimeChange;
+    
     [self.delegate player:nil
                 eventName:eventParams.allKeys.firstObject
                      JSON:eventParams.allValues.firstObject];

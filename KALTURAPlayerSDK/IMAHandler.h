@@ -148,8 +148,17 @@ typedef NS_ENUM(NSInteger, IMAAdEventType){
      */
     kIMAAdEvent_CUEPOINTS_CHANGED,
     /**
+     * The user has closed the icon fallback image dialog. This may be a good time to resume ad playback, which the SDK autopaused on icon tap. This event only fires for tvOS.
+     */
+    kIMAAdEvent_ICON_FALLBACK_IMAGE_CLOSED,
+    /**
+     * The user has tapped an ad icon. On iOS, the SDK will navigate to the landing page. On tvOS, the SDK will present a modal dialog containing the VAST icon fallback image.
+     */
+    kIMAAdEvent_ICON_TAPPED,
+    /**
      *  First quartile of a linear ad was reached.
      */
+    
     kIMAAdEvent_FIRST_QUARTILE,
     /**
      *  An ad was loaded.
