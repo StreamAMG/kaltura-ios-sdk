@@ -440,4 +440,4 @@ The following Ad types are supported by the SDK:
 ## Change Log ##
 
 3.1.0
-- Updated to support Google IMA SDK 13.3+
+- Updated to support Google IMA SDK 13.3.0
