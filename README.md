@@ -425,3 +425,19 @@ Add the following configs:
     config?.addKey("doubleClick.adTagUrl", withValue: "tag-url")
 ```
 
+### Supported Ad Types ###
+
+The following Ad types are supported by the SDK:
+
+- Single Inline Linear
+- Single Skippable Inline
+- Single Redirect Linear
+- VMAP Pre-roll
+- VMAP Mid-roll
+- VMAP Bumper
+- SIMID Survey
+
+## Change Log ##
+
+3.1.0
+- Updated to support Google IMA SDK 13.3+

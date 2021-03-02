@@ -238,7 +238,6 @@
             self.adEventParams.isLinear = event.ad.isLinear;
             eventParams = self.adEventParams.toJSON.adSkipped;
             break;
-    break;
         case kIMAAdEvent_STREAM_LOADED:
             [adsManager start];
             self.adEventParams.isLinear = event.ad.isLinear;

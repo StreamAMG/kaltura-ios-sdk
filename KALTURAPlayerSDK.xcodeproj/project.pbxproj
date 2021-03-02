@@ -115,6 +115,8 @@
 		BFBE8EB81C0B174400649BDF /* SmsStrategy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFBE8E801C0B139400649BDF /* SmsStrategy.h */; };
 		BFBE8EB91C0B174400649BDF /* TwitterStrategy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFBE8E821C0B139400649BDF /* TwitterStrategy.h */; };
 		BFBE8EBA1C0B174400649BDF /* KPShareManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFBE8E691C0B139400649BDF /* KPShareManager.h */; };
+		CD0D44AB25EE9A6500AD6272 /* KPControlsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0D44A825EE9A6500AD6272 /* KPControlsView.m */; };
+		CD0D44AC25EE9A6500AD6272 /* KPControlsWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0D44A925EE9A6500AD6272 /* KPControlsWKWebView.m */; };
 		FB0B5AAE1C7FB3BE0067872E /* KPWidevineClassicHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0B5AAD1C7FB3BE0067872E /* KPWidevineClassicHandler.m */; };
 		FB48BCB41C7B53E300B2E1B7 /* KPFairPlayHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BCB31C7B53E300B2E1B7 /* KPFairPlayHandler.m */; };
 		FB48BCB71C7C8A4800B2E1B7 /* KPAssetBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FB48BCB61C7C8A4800B2E1B7 /* KPAssetBuilder.m */; };
@@ -294,6 +296,10 @@
 		BFBE8E841C0B139400649BDF /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utilities.h; path = KALTURAPlayerSDK/Utilities.h; sourceTree = SOURCE_ROOT; };
 		BFC574A41997C296000511B8 /* libWViPhoneAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWViPhoneAPI.a; sourceTree = SOURCE_ROOT; };
 		BFFFA727182F9E31005B3B24 /* libKALTURAPlayerSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKALTURAPlayerSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD0D44A725EE9A6500AD6272 /* KPControlsWKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPControlsWKWebView.h; sourceTree = "<group>"; };
+		CD0D44A825EE9A6500AD6272 /* KPControlsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPControlsView.m; sourceTree = "<group>"; };
+		CD0D44A925EE9A6500AD6272 /* KPControlsWKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPControlsWKWebView.m; sourceTree = "<group>"; };
+		CD0D44AA25EE9A6500AD6272 /* KPControlsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPControlsView.h; sourceTree = "<group>"; };
 		FB0B5AAC1C7FB3BE0067872E /* KPWidevineClassicHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPWidevineClassicHandler.h; sourceTree = "<group>"; };
 		FB0B5AAD1C7FB3BE0067872E /* KPWidevineClassicHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPWidevineClassicHandler.m; sourceTree = "<group>"; };
 		FB48BCB21C7B53E300B2E1B7 /* KPFairPlayHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPFairPlayHandler.h; sourceTree = "<group>"; };
@@ -525,6 +531,10 @@
 		BFFFA72C182F9E31005B3B24 /* KALTURAPlayerSDK */ = {
 			isa = PBXGroup;
 			children = (
+				CD0D44AA25EE9A6500AD6272 /* KPControlsView.h */,
+				CD0D44A825EE9A6500AD6272 /* KPControlsView.m */,
+				CD0D44A725EE9A6500AD6272 /* KPControlsWKWebView.h */,
+				CD0D44A925EE9A6500AD6272 /* KPControlsWKWebView.m */,
 				9DD4C5BE205BBEB8003BFB48 /* KPCastProvider.h */,
 				BF1C07531C0DA7F800A67462 /* NSBundle+Kaltura.h */,
 				BF1C07541C0DA7F800A67462 /* NSBundle+Kaltura.m */,
@@ -715,6 +725,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFBE8E9A1C0B139400649BDF /* NSMutableDictionary+AdSupport.m in Sources */,
+				CD0D44AB25EE9A6500AD6272 /* KPControlsView.m in Sources */,
 				BFBE8E901C0B139400649BDF /* KPLog.m in Sources */,
 				BFBE8E9C1C0B139400649BDF /* NSString+Utilities.m in Sources */,
 				FB6E21E91D59F955001114CA /* KPAssetRegistrationHelper.m in Sources */,
@@ -758,6 +769,7 @@
 				BFBE8E991C0B139400649BDF /* NSDictionary+Strategy.m in Sources */,
 				BF1C07741C0DA8E900A67462 /* KPController.m in Sources */,
 				BFBE8E9B1C0B139400649BDF /* NSMutableDictionary+Cache.m in Sources */,
+				CD0D44AC25EE9A6500AD6272 /* KPControlsWKWebView.m in Sources */,
 				FBDB1AA91C70A0F0002BD742 /* NSMutableArray+QueryItems.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -831,7 +843,7 @@
 				INFOPLIST_FILE = KPlayerResources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kaltura.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = KALTURAPlayerSDKResources;
@@ -871,7 +883,7 @@
 				INFOPLIST_FILE = KPlayerResources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kaltura.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = KALTURAPlayerSDKResources;
