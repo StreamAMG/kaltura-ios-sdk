@@ -67,7 +67,7 @@
         _supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
         _extraConfig = [NSMutableDictionary dictionary];
         _cacheConfig = [[KPCacheConfig alloc] init];
-        
+        _adsUseExternalBrowser = NO;
         [self addConfigKey:@"nativeVersion" withValue:[NSString stringWithFormat:@"v%@", [self getVersion]]];
     }
     return self;
@@ -80,6 +80,7 @@
         _uiConfId = uiConfId;
         _partnerId = partnerId;
         _cacheSize = DEFAULT_CACHE_SIZE_MB;
+        _adsUseExternalBrowser = NO;
         
         [self resolveEmbedFrameUrlWithCompletionHandler:^(BOOL success) {
             KPLogDebug(@"Resolved player URL");
@@ -133,6 +134,7 @@
         
     config.entryId = base[@"entryId"];
     config.ks = base[@"ks"];
+    config.adsUseExternalBrowser = NO;
     
     [extra enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([key isKindOfClass:NSString.class]) {
@@ -436,6 +438,7 @@
     self = [super init];
     if (self) {
         _embedFrameURL = url.copy;
+        self.adsUseExternalBrowser = NO;
     }
     return self;
 }

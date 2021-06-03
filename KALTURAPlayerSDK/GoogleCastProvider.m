@@ -126,7 +126,7 @@ didReceiveTextMessage:(NSString *)message
     NSLog(@"didReceiveTextMessage::%@", message);
     if ([message hasPrefix:@"readyForMedia"]) {
         KPLogTrace(@"message::%@", message);
-        [_castChannel sendTextMessage:@"{\"type\":\"hide\",\"target\":\"logo\"}"];
+        [_castChannel sendTextMessage:@"{\"type\":\"hide\",\"target\":\"logo\"}" error: nil];  //sendTextMessage:@"{\"type\":\"hide\",\"target\":\"logo\"}"];
         NSArray *castParams = message.castParams;
         
         if (castParams) {
@@ -289,7 +289,7 @@ didReceiveTextMessage:(NSString *)message
 - (BOOL)sendTextMessage:(NSString *)message {
     NSLog(@"sendmessage::: %@", message);
     if (_castChannel) {
-        return [_castChannel sendTextMessage:message];
+        return [_castChannel sendTextMessage:message error:nil];    //sendTextMessage:message];
     }
     
     return NO;

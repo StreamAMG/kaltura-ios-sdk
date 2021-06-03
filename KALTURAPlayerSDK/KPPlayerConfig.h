@@ -43,6 +43,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use initWithServer:uiConfID:partnerId:");
 @property (nonatomic, copy) NSString *entryId;
 
 @property (nonatomic, copy) NSString *advertiserID;
+@property (nonatomic) BOOL adsUseExternalBrowser;
 @property (nonatomic) BOOL enableHover;
 
 @property (nonatomic, copy) NSDictionary* supportedMediaFormats;

@@ -42,4 +42,5 @@
 @property (nonatomic, copy) NSString *locale;
 @property (nonatomic, weak) id<IMAWebOpenerDataSource> datasource;
 @property (nonatomic, weak) id<KPlayerDelegate> delegate;
+@property (nonatomic, assign) BOOL adsUseExternalBrowser;
 @end

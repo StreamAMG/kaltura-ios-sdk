@@ -70,5 +70,6 @@ static NSString *PostrollEndedKey = @"postEnded";
 @property (nonatomic, strong) KPIMAPlayerViewController *adController;
 @property (nonatomic, strong) id kIMAWebOpenerDelegate;
 @property (nonatomic, assign) BOOL preferSubtitles;
+@property (nonatomic, assign) BOOL adsUseExternalBrowser;
 
 @end

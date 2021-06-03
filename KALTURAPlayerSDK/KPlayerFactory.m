@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, CurrentPlyerType) {
 - (void)setAdTagURL:(NSString *)adTagURL {
     if (!_adController) {
         _adController = [KPIMAPlayerViewController new];
-
+        _adController.adsUseExternalBrowser = self.adsUseExternalBrowser;
         if (!_adController) {
         
             return;

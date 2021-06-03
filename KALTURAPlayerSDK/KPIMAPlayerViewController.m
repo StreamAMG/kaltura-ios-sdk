@@ -109,8 +109,18 @@
 - (id<AdsRenderingSettings>)adsRenderingSettings {
     if (!_adsRenderingSettings) {
         _adsRenderingSettings = [NSClassFromString(@"IMAAdsRenderingSettings") new];
+        if (!self.adsUseExternalBrowser){
         _adsRenderingSettings.webOpenerPresentingController = self;
         _adsRenderingSettings.webOpenerDelegate = _datasource;
+        }
+    }
+    return _adsRenderingSettings;
+}
+
+// Create ads rendering settings to tell the SDK to use an external browser.
+- (id<AdsRenderingSettings>)adsRenderingSettingsExternal {
+    if (!_adsRenderingSettings) {
+        _adsRenderingSettings = [NSClassFromString(@"IMAAdsRenderingSettings") new];
     }
     return _adsRenderingSettings;
 }
@@ -161,6 +171,7 @@
     // Initialize the ads manager.
     
     [self.adsManager initializeWithAdsRenderingSettings: self.adsRenderingSettings];
+    
     
     NSDictionary *eventParams = AdLoadedEventKey.nullVal;
     [self.delegate player:nil

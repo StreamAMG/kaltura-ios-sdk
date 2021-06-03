@@ -73,6 +73,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 @property (nonatomic) BOOL isFullScreenToggled;
 @property (nonatomic, strong) UIView *superView;
 @property (nonatomic) NSTimeInterval seekValue;
+@property (nonatomic) BOOL adsUseExternalBrowser;
 
 @end
 
@@ -91,6 +92,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     self = [super init];
     if (self) {
         videoURL = url;
+        _adsUseExternalBrowser = NO;
         
         return self;
     }
@@ -103,6 +105,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
         _currentConfiguration = configuration;
         _currentConfiguration.supportedMediaFormats = [KPAssetBuilder supportedMediaFormats];
         videoURL = _currentConfiguration.videoURL;
+        _adsUseExternalBrowser = _currentConfiguration.adsUseExternalBrowser;
 
         // If the developer set the cache size, the cache system is triggered.
         if (_currentConfiguration.cacheSize > 0) {
@@ -317,6 +320,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     // Initialize player factory
     if (!_playerFactory) {
         _playerFactory = [[KPlayerFactory alloc] initWithPlayerClassName:PlayerClassName];
+        _playerFactory.adsUseExternalBrowser = self.adsUseExternalBrowser;
         [_playerFactory addPlayerToController:self];
         _playerFactory.delegate = self;
         _playerFactory.kIMAWebOpenerDelegate = _kIMAWebOpenerDelegate;
@@ -518,6 +522,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
     if (config) {
         _currentConfiguration = config;
         _currentConfiguration.supportedMediaFormats = [KPAssetBuilder supportedMediaFormats];
+        self.adsUseExternalBrowser = config.adsUseExternalBrowser;
         
         [self.playerFactory prepareForChangeConfiguration];
         [self.controlsView loadRequest:[NSURLRequest requestWithURL:config.videoURL]];
