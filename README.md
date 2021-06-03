@@ -437,7 +437,21 @@ The following Ad types are supported by the SDK:
 - VMAP Bumper
 - SIMID Survey
 
+### Using an external browser for links in Ads ###
+
+By default, the IMA (Google Ads) plugin will automatically push any interaction links to an internal browser.
+
+To change this to use an external browser, add the following line to your 'KPPlayerConfig' configuration (when creating the player)
+
+```
+#!swift
+    config?.adsUseExternalBrowser = true
+```
+
 ## Change Log ##
 
 3.1.0
 - Updated to support Google IMA SDK 13.3.0
+
+3.1.1
+- Added support for IMA Pop outs to push to an external browser instead of the default internal browser.
