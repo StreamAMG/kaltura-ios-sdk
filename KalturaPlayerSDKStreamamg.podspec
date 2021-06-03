@@ -32,7 +32,8 @@ s.platform     = :ios, "9.0"
 
 
 # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-s.source       = { :git => 'git@bitbucket.org:sukdev/kaltura-ios-sdk.git', :tag => 'v' + s.version.to_s }
+#  s.source       = { :git => 'git@bitbucket.org:sukdev/kaltura-ios-sdk.git', :tag => 'v' + s.version.to_s }
+s.source       = { :git => 'git@bitbucket.org:sukdev/kaltura-ios-sdk.git', :branch => 'HERMES-245-ima-sdk-add-feature' }
 s.libraries      = 'z', 'System', 'xml2.2', 'c++', 'xml2'
 s.framework    = 'MediaPlayer', 'SystemConfiguration', 'QuartzCore', 'CoreFoundation', 'AVFoundation', 'AudioToolbox', 'CFNetwork', 'AdSupport', 'WebKit', 'MessageUI', 'Social', 'MediaAccessibility', 'Foundation', 'CoreGraphics', 'UIKit'
 
