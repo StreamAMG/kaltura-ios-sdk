@@ -1,3 +1,8 @@
+:heavy_exclamation_mark: Please note this project is **deprecated**, please see [streamamg-sdk-ios](https://github.com/StreamAMG/streamamg-sdk-ios).
+
+---------------------------
+
+
 Please always use master branch for production. 
 ======
 
