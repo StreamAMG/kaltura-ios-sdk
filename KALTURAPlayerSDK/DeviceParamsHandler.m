@@ -10,9 +10,9 @@
 #import "DeviceParamsHandler.h"
 #import <Webkit/Webkit.h>
 
-void setUserAgent() {
+void setUserAgent(WKWebView* wv) {
     NSString* suffixUA = @"kalturaNativeCordovaPlayer";
-    
+
     [[[WKWebView alloc] initWithFrame:CGRectZero] evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id _Nullable defaultUA, NSError * _Nullable error) {
         NSString* finalUA = [defaultUA stringByAppendingString:suffixUA];
         NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:finalUA, @"UserAgent", nil];
